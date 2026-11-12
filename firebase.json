@@ -1,0 +1,8 @@
+{
+  "//": "Backend functions, Firestore rules, indexes, and Storage rules are managed from the canonical ../Sherize app project. This file configures static hosting compatibility only.",
+  "hosting": {
+    "public": "frontend/dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [{ "source": "**", "destination": "/index.html" }]
+  }
+}
