@@ -1,3 +1,5 @@
 # Functions
 
-Employee Portal backend functionality has not been added. Shared Firebase backend code remains in the canonical `Sherize app` project.
+Employee Portal does not contain a separate Cloud Functions implementation.
+
+The frontend uses the Firebase Functions Web SDK to call the existing deployed functions from the canonical `Sherize app/functions` project. Do not copy or deploy those functions from this portal.
