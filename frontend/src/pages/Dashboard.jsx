@@ -8,7 +8,7 @@ import { usePlatform } from '../context/PlatformContext'
 import { useCollection, useDocument } from '../hooks/useFirestore'
 import { transitionWorkSession, todayKey } from '../services/employee'
 import { Alert, cardClass, inputClass, PageHeader, primaryButton, secondaryButton } from '../components/ui'
-import { errorMessage, isKycApproved, money, profileMissing } from '../lib/format'
+import { errorMessage, isKycApproved, money, profileMissing } from '../shared/utils/format'
 
 function elapsed(session) {
   if (!session?.startedAt) return 0

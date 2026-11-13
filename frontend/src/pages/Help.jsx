@@ -6,7 +6,7 @@ import { db, storage } from '../services/firebase'
 import { useAuth } from '../context/AuthContext'
 import { useCollection } from '../hooks/useFirestore'
 import { Alert, cardClass, inputClass, PageHeader, primaryButton } from '../components/ui'
-import { errorMessage, imageFileError } from '../lib/format'
+import { errorMessage, imageFileError } from '../shared/utils/format'
 
 const fallbackFaqs = [
   ['How do I start working on a task?', 'Open Tasks, accept an available marketplace task after KYC approval, then open the assignment and process each lead.'],

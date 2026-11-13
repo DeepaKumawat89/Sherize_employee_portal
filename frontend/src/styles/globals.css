@@ -1,1 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
+
+/* Keep the employee experience on the same visual system as the client portal. */
+@theme {
+  --color-background: #f6f8fc;
+  --color-surface: #ffffff;
+  --color-sidebar: #f8fafc;
+  --color-primary: #f26a21;
+  --color-primary-hover: #d95716;
+  --color-primary-soft: #fff0e8;
+  --color-text-main: #17243a;
+  --color-text-muted: #66758d;
+  --color-text-light: #98a2b3;
+  --color-border: #e3e9f1;
+  --color-border-strong: #d9e1ec;
+
+  /* Existing employee pages use indigo utilities for their brand accent. */
+  --color-indigo-50: #fff0e8;
+  --color-indigo-100: #ffe4d5;
+  --color-indigo-200: #ffc7a8;
+  --color-indigo-300: #ffa272;
+  --color-indigo-400: #fb8749;
+  --color-indigo-500: #f47a35;
+  --color-indigo-600: #f26a21;
+  --color-indigo-700: #d95716;
+  --color-indigo-800: #ad4510;
+  --color-indigo-900: #7d3213;
+  --color-indigo-950: #461808;
+
+  --color-slate-50: #f6f8fc;
+  --color-slate-100: #edf2f8;
+  --color-slate-200: #e3e9f1;
+  --color-slate-300: #d9e1ec;
+  --color-slate-400: #98a2b3;
+  --color-slate-500: #66758d;
+  --color-slate-600: #53627a;
+  --color-slate-700: #34445d;
+  --color-slate-800: #253650;
+  --color-slate-900: #17243a;
+  --color-slate-950: #17243a;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --shadow-card: 0 1px 2px rgb(23 36 58 / 0.03), 0 10px 24px rgb(23 36 58 / 0.04);
+  --shadow-elevated: 0 24px 70px rgb(15 23 42 / 0.22);
+}
+
+:root {
+  color-scheme: light;
+  --sidebar-width: 260px;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    min-width: 320px;
+    min-height: 100%;
+    margin: 0;
+    background: var(--color-background);
+    color: var(--color-text-main);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 3px solid rgb(242 106 33 / 0.22);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-primary-soft);
+    color: var(--color-text-main);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -7,7 +7,7 @@ import { callExistingFunction } from '../services/employee'
 import { useCollection } from '../hooks/useFirestore'
 import { useAuth } from '../context/AuthContext'
 import { Alert, EmptyState, inputClass, primaryButton, secondaryButton, StatusPill } from '../components/ui'
-import { errorMessage } from '../lib/format'
+import { errorMessage } from '../shared/utils/format'
 
 export default function Jobs() {
   const { user, profile, logout } = useAuth()

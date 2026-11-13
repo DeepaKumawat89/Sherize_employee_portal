@@ -8,7 +8,7 @@ import { usePlatform } from '../context/PlatformContext'
 import { useCollection, useDocument } from '../hooks/useFirestore'
 import { callExistingFunction } from '../services/employee'
 import { Alert, cardClass, EmptyState, inputClass, PageHeader, primaryButton, secondaryButton, StatusPill } from '../components/ui'
-import { dateValue, errorMessage, formatDateTime, isKycApproved, money, profileMissing } from '../lib/format'
+import { dateValue, errorMessage, formatDateTime, isKycApproved, money, profileMissing } from '../shared/utils/format'
 
 export default function Earnings() {
   const { user, profile } = useAuth()

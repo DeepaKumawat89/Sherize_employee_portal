@@ -8,7 +8,7 @@ import { usePlatform } from '../context/PlatformContext'
 import { useCollection } from '../hooks/useFirestore'
 import { callExistingFunction } from '../services/employee'
 import { Alert, cardClass, EmptyState, inputClass, PageHeader, primaryButton, secondaryButton, StatusPill } from '../components/ui'
-import { dateValue, errorMessage, formatDateTime, isKycApproved, money, normalizeStatus } from '../lib/format'
+import { dateValue, errorMessage, formatDateTime, isKycApproved, money, normalizeStatus } from '../shared/utils/format'
 
 const activeStatuses = ['active', 'in_progress', 'accepted', 'pending', 'assigned', 'pending_admin_review']
 const terminalStatuses = new Set(['completed', 'rejected', 'revoked', 'cancelled', 'out_of_tat', 'expired', 'approved'])

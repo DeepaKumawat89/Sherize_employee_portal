@@ -5,7 +5,7 @@ import { LoaderCircle, MailCheck, RefreshCw, ShieldCheck } from 'lucide-react'
 import { auth, db } from '../services/firebase'
 import { callExistingFunction, verifyExistingEmailOtp } from '../services/employee'
 import { Alert, inputClass, primaryButton, secondaryButton } from '../components/ui'
-import { errorMessage } from '../lib/format'
+import { errorMessage } from '../shared/utils/format'
 
 export default function VerifyEmail() {
   const navigate = useNavigate()

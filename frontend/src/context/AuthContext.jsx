@@ -9,7 +9,7 @@ import {
 import { doc, getDoc, onSnapshot, serverTimestamp, setDoc } from 'firebase/firestore'
 import { auth, db } from '../services/firebase'
 import { callExistingFunction } from '../services/employee'
-import { errorMessage } from '../lib/format'
+import { errorMessage } from '../shared/utils/format'
 
 const AuthContext = createContext(null)
 const NON_EMPLOYEE_ROLES = new Set(['admin', 'super_admin', 'task_review_admin', 'kyc_admin', 'payment_admin', 'support_admin', 'developer', 'team_leader', 'team_lead', 'client'])

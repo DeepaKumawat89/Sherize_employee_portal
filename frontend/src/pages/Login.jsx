@@ -19,7 +19,7 @@ import {
   X,
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
-import { errorMessage } from '../lib/format'
+import { errorMessage } from '../shared/utils/format'
 
 const employeePattern = /^SHR-?(?:\d{4}|\d{6})$/i
 

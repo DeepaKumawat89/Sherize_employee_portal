@@ -5,7 +5,7 @@ import { Landmark, LoaderCircle, Save, Smartphone } from 'lucide-react'
 import { db } from '../services/firebase'
 import { useAuth } from '../context/AuthContext'
 import { Alert, cardClass, inputClass, PageHeader, primaryButton } from '../components/ui'
-import { errorMessage } from '../lib/format'
+import { errorMessage } from '../shared/utils/format'
 
 export default function BankDetails() {
   const { user, profile, refreshProfile } = useAuth()

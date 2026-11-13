@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext'
 import { usePlatform } from '../context/PlatformContext'
 import { useCollection } from '../hooks/useFirestore'
 import { EmptyState, PageHeader, StatusPill, cardClass } from '../components/ui'
-import { dateValue, formatDate, money, normalizeStatus } from '../lib/format'
+import { dateValue, formatDate, money, normalizeStatus } from '../shared/utils/format'
 
 const terminal = new Set(['completed', 'rejected', 'revoked', 'cancelled', 'out_of_tat', 'expired', 'approved'])
 

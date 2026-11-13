@@ -5,7 +5,7 @@ import { db } from '../services/firebase'
 import { useAuth } from '../context/AuthContext'
 import { useCollection } from '../hooks/useFirestore'
 import { Alert, cardClass, EmptyState, inputClass, PageHeader, primaryButton, secondaryButton, StatusPill } from '../components/ui'
-import { errorMessage, formatDateTime } from '../lib/format'
+import { errorMessage, formatDateTime } from '../shared/utils/format'
 
 function Thread({ thread, onBack }) {
   const { user, profile } = useAuth()

@@ -4,7 +4,7 @@ import { Bell, CircleHelp, Copy, CreditCard, FileText, LockKeyhole, LogOut, Mail
 import { useAuth } from '../context/AuthContext'
 import { useSecurity } from '../context/SecurityContext'
 import { Alert, cardClass, inputClass, PageHeader, primaryButton, secondaryButton } from '../components/ui'
-import { errorMessage } from '../lib/format'
+import { errorMessage } from '../shared/utils/format'
 
 export default function SettingsPage() {
   const { profile, logout } = useAuth()

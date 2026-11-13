@@ -6,7 +6,7 @@ import { Camera, LoaderCircle, Save, UserRound } from 'lucide-react'
 import { db, storage } from '../services/firebase'
 import { useAuth } from '../context/AuthContext'
 import { Alert, cardClass, inputClass, PageHeader, primaryButton } from '../components/ui'
-import { errorMessage, imageFileError } from '../lib/format'
+import { errorMessage, imageFileError } from '../shared/utils/format'
 
 const initial = { fullName: '', email: '', phone: '', gender: '', dateOfBirth: '', houseNumber: '', area: '', landmark: '', city: '', state: '', pincode: '', language: '', education: '', experience: '', headsetAvailable: 'No', deviceType: '', internetType: '' }
 const languages = ['English', 'Hindi', 'Telugu', 'Tamil', 'Kannada', 'Malayalam']

@@ -6,7 +6,7 @@ import { db, storage } from '../services/firebase'
 import { useAuth } from '../context/AuthContext'
 import { useDocument } from '../hooks/useFirestore'
 import { Alert, cardClass, PageHeader, primaryButton, StatusPill } from '../components/ui'
-import { errorMessage, imageFileError, normalizeStatus } from '../lib/format'
+import { errorMessage, imageFileError, normalizeStatus } from '../shared/utils/format'
 
 export default function Kyc() {
   const { user } = useAuth()

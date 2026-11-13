@@ -6,7 +6,7 @@ import { auth, db } from '../services/firebase'
 import { callEmployeeApi, callExistingFunction } from '../services/employee'
 import { useDocument } from '../hooks/useFirestore'
 import { Alert, cardClass, PageHeader, primaryButton, secondaryButton, StatusPill, inputClass } from '../components/ui'
-import { errorMessage, formatDateTime } from '../lib/format'
+import { errorMessage, formatDateTime } from '../shared/utils/format'
 
 const outcomes = [
   ['interested', 'Interested', ThumbsUp],

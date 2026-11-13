@@ -3,7 +3,7 @@ import { Bell, BriefcaseBusiness, CheckCircle2, CircleHelp, CreditCard, Edit3, M
 import { useAuth } from '../context/AuthContext'
 import { usePlatform } from '../context/PlatformContext'
 import { cardClass, PageHeader, primaryButton, StatusPill } from '../components/ui'
-import { isKycApproved, money, normalizeStatus, profileMissing } from '../lib/format'
+import { isKycApproved, money, normalizeStatus, profileMissing } from '../shared/utils/format'
 
 export default function Profile() {
   const { profile } = useAuth()

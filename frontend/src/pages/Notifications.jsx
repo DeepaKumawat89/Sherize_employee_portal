@@ -6,7 +6,7 @@ import { db } from '../services/firebase'
 import { useAuth } from '../context/AuthContext'
 import { useCollection } from '../hooks/useFirestore'
 import { EmptyState, PageHeader, secondaryButton, cardClass } from '../components/ui'
-import { errorMessage, formatDateTime } from '../lib/format'
+import { errorMessage, formatDateTime } from '../shared/utils/format'
 
 export default function Notifications() {
   const { user } = useAuth()

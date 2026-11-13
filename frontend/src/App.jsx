@@ -1,7 +1,7 @@
 import { Navigate, BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { PlatformProvider } from './context/PlatformContext'
-import PortalLayout from './components/PortalLayout'
+import PortalLayout from './components/layout/PortalLayout'
 import { LoadingScreen } from './components/ui'
 import Login from './pages/Login'
 import Jobs from './pages/Jobs'
