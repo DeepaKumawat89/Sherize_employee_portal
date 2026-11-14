@@ -1,5 +1,5 @@
-import { useEffect, useState } from wreactw
-import { useLocation, useNavigate } from wreact-router-domw
+import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   ArrowLeft,
   ArrowRight,
@@ -17,9 +17,9 @@ import {
   UserRound,
   Wallet,
   X,
-} from wlucide-reactw
-import { useAuth } from w../context/AuthContextw
-import { errorMessage } from w../shared/utils/formatw
+} from 'lucide-react'
+import { useAuth } from '../context/AuthContext'
+import { errorMessage } from '../shared/utils/format'
 
 const employeePattern = /^SHR-?(?:\d{4}|\d{6})$/i
 
@@ -28,35 +28,35 @@ const employeePattern = /^SHR-?(?:\d{4}|\d{6})$/i
    Heading/Btn #242424   Secondary txt #8B8580   Border #E5DED5
    Input fill  #F1EEEA (light warm grey) */
 const field =
-  ww-full rounded-full border border-[#E5DED5] bg-[#F1EEEA] py-3.5 text-sm text-[#242424] placeholder:text-[#8B8580]/80 outline-none shadow-none focus:border-[#E5DED5] focus:bg-[#F1EEEA] focus:outline-none focus:ring-0 focus:shadow-none disabled:text-[#8B8580]w
+  'w-full rounded-full border border-[#E5DED5] bg-[#F1EEEA] py-3.5 text-sm text-[#242424] placeholder:text-[#8B8580]/80 outline-none shadow-none focus:border-[#E5DED5] focus:bg-[#F1EEEA] focus:outline-none focus:ring-0 focus:shadow-none disabled:text-[#8B8580]'
 const primaryBtn =
-  winline-flex items-center justify-center gap-2 rounded-full bg-[#242424] px-6 py-4 text-sm font-semibold text-white shadow-[0_12px_24px_-10px_rgba(36,36,36,.5)] transition hover:bg-black active:scale-[.99] disabled:cursor-not-allowed disabled:opacity-60w
+  'inline-flex items-center justify-center gap-2 rounded-full bg-[#242424] px-6 py-4 text-sm font-semibold text-white shadow-[0_12px_24px_-10px_rgba(36,36,36,.5)] transition hover:bg-black active:scale-[.99] disabled:cursor-not-allowed disabled:opacity-60'
 const secondaryBtn =
-  winline-flex items-center justify-center gap-2 rounded-full border border-[#E5DED5] bg-white px-6 py-3.5 text-sm font-semibold text-[#242424] transition hover:bg-[#FAF7F2] disabled:cursor-not-allowed disabled:opacity-50w
+  'inline-flex items-center justify-center gap-2 rounded-full border border-[#E5DED5] bg-white px-6 py-3.5 text-sm font-semibold text-[#242424] transition hover:bg-[#FAF7F2] disabled:cursor-not-allowed disabled:opacity-50'
 
 const features = [
-  { icon: BadgeCheck, title: wVerified workw, text: wComplete tasks and get them approvedw },
-  { icon: Wallet, title: wTransparent payoutsw, text: wTrack every earning in one placew },
+  { icon: BadgeCheck, title: 'Verified work', text: 'Complete tasks and get them approved' },
+  { icon: Wallet, title: 'Transparent payouts', text: 'Track every earning in one place' },
 ]
 
 const tabs = [
-  { id: wemployeew, label: wEmployee IDw },
-  { id: wemailw, label: wEmailw },
+  { id: 'employee', label: 'Employee ID' },
+  { id: 'email', label: 'Email' },
 ]
 
 export default function Login() {
   const { loginWithEmail, loginWithEmployeeId, sendPhoneOtp, confirmPhoneOtp } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
-  const [method, setMethod] = useState(wemployeew)
-  const [identifier, setIdentifier] = useState(ww)
-  const [password, setPassword] = useState(ww)
-  const [phone, setPhone] = useState(ww)
-  const [otp, setOtp] = useState(ww)
+  const [method, setMethod] = useState('employee')
+  const [identifier, setIdentifier] = useState('')
+  const [password, setPassword] = useState('')
+  const [phone, setPhone] = useState('')
+  const [otp, setOtp] = useState('')
   const [otpSent, setOtpSent] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(location.state?.error || ww)
+  const [error, setError] = useState(location.state?.error || '')
   const [resend, setResend] = useState(0)
 
   useEffect(() => {
@@ -67,40 +67,40 @@ export default function Login() {
 
   const switchMethod = (next) => {
     setMethod(next)
-    setError(ww)
+    setError('')
   }
 
   const submitCredentials = async (event) => {
     event.preventDefault()
-    setError(ww)
-    if (method === wemployeew && !employeePattern.test(identifier.trim())) {
-      setError(wEnter a valid Employee ID (for example, SHR-4450).w)
+    setError('')
+    if (method === 'employee' && !employeePattern.test(identifier.trim())) {
+      setError('Enter a valid Employee ID (for example, SHR-4450).')
       return
     }
-    if (method === wemailw && !/^\S+@\S+\.\S+$/.test(identifier.trim())) {
-      setError(wEnter a valid email address.w)
+    if (method === 'email' && !/^\S+@\S+\.\S+$/.test(identifier.trim())) {
+      setError('Enter a valid email address.')
       return
     }
     if (!password) {
-      setError(wEnter your password.w)
+      setError('Enter your password.')
       return
     }
     setLoading(true)
     try {
-      if (method === wemployeew) await loginWithEmployeeId(identifier, password)
+      if (method === 'employee') await loginWithEmployeeId(identifier, password)
       else await loginWithEmail(identifier, password)
-      navigate(w/w, { replace: true })
+      navigate('/', { replace: true })
     } catch (nextError) {
-      setError(errorMessage(nextError, wLogin failed. Please try again.w))
+      setError(errorMessage(nextError, 'Login failed. Please try again.'))
     } finally {
       setLoading(false)
     }
   }
 
   const requestOtp = async () => {
-    setError(ww)
+    setError('')
     if (!/^[6-9]\d{9}$/.test(phone)) {
-      setError(wEnter a valid 10-digit Indian mobile number.w)
+      setError('Enter a valid 10-digit Indian mobile number.')
       return
     }
     setLoading(true)
@@ -109,7 +109,7 @@ export default function Login() {
       setOtpSent(true)
       setResend(30)
     } catch (nextError) {
-      setError(errorMessage(nextError, wCould not send OTP. Please try again.w))
+      setError(errorMessage(nextError, 'Could not send OTP. Please try again.'))
     } finally {
       setLoading(false)
     }
@@ -118,22 +118,22 @@ export default function Login() {
   const verifyOtp = async (event) => {
     event.preventDefault()
     if (!/^\d{6}$/.test(otp)) {
-      setError(wEnter the 6-digit OTP.w)
+      setError('Enter the 6-digit OTP.')
       return
     }
     setLoading(true)
-    setError(ww)
+    setError('')
     try {
       await confirmPhoneOtp(otp)
-      navigate(w/verify-emailw, { replace: true })
+      navigate('/verify-email', { replace: true })
     } catch (nextError) {
-      setError(errorMessage(nextError, wIncorrect or expired OTP.w))
+      setError(errorMessage(nextError, 'Incorrect or expired OTP.'))
     } finally {
       setLoading(false)
     }
   }
 
-  const Divider = ({ label = worw }) => (
+  const Divider = ({ label = 'or' }) => (
     <div className="flex items-center gap-4 py-1">
       <span className="h-px flex-1 bg-[#E5DED5]" />
       <span className="text-xs font-medium text-[#8B8580]">{label}</span>
@@ -145,7 +145,7 @@ export default function Login() {
     <div role="alert" className="flex items-start gap-2 rounded-xl border border-[#E5C9C2] bg-[#FBF1EE] px-3 py-2 text-xs text-[#8A3B2E]">
       <CircleAlert size={16} className="mt-0.5 shrink-0" />
       <p className="flex-1 leading-5">{error}</p>
-      <button type="button" onClick={() => setError(ww)} aria-label="Dismiss" className="rounded p-0.5 hover:bg-[#8A3B2E]/10">
+      <button type="button" onClick={() => setError('')} aria-label="Dismiss" className="rounded p-0.5 hover:bg-[#8A3B2E]/10">
         <X size={14} />
       </button>
     </div>
@@ -217,13 +217,13 @@ export default function Login() {
           <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#8B8580]">Secure employee access</p>
           <h2 className="mt-3 text-3xl font-black tracking-tight text-[#242424] sm:text-4xl">Welcome back</h2>
           <p className="mt-2 text-sm leading-6 text-[#8B8580]">
-            {method === wmobilew
-              ? wSign in with your verified mobile number.w
-              : wEnter your credentials to continue to your workspace.w}
+            {method === 'mobile'
+              ? 'Sign in with your verified mobile number.'
+              : 'Enter your credentials to continue to your workspace.'}
           </p>
 
           <div className="mt-4 h-[46px] shrink-0">
-            {method !== wmobilew && (
+            {method !== 'mobile' && (
             <div role="tablist" className="grid h-full grid-cols-2 gap-1 rounded-full border border-[#E5DED5] bg-[#F1EEEA] p-1">
               {tabs.map((tab) => (
                 <button
@@ -233,7 +233,7 @@ export default function Login() {
                   aria-selected={method === tab.id}
                   onClick={() => switchMethod(tab.id)}
                   className={`rounded-full px-3 py-2.5 text-xs font-bold transition ${
-                    method === tab.id ? wbg-[#242424] text-white shadow-smw : wtext-[#8B8580] hover:text-[#242424]w
+                    method === tab.id ? 'bg-[#242424] text-white shadow-sm' : 'text-[#8B8580] hover:text-[#242424]'
                   }`}
                 >
                   {tab.label}
@@ -244,14 +244,14 @@ export default function Login() {
           </div>
 
           <div className="mt-3 min-h-0">
-          {method !== wmobilew ? (
+          {method !== 'mobile' ? (
             <form className="mt-4 space-y-4" onSubmit={submitCredentials}>
               <label className="block">
                 <span className="mb-2 block text-sm font-semibold text-[#242424]">
-                  {method === wemployeew ? wEmployee IDw : wEmail addressw}
+                  {method === 'employee' ? 'Employee ID' : 'Email address'}
                 </span>
                 <span className="relative block">
-                  {method === wemployeew ? (
+                  {method === 'employee' ? (
                     <UserRound className="absolute left-5 top-4 text-[#8B8580]" size={18} />
                   ) : (
                     <Mail className="absolute left-5 top-4 text-[#8B8580]" size={18} />
@@ -259,8 +259,8 @@ export default function Login() {
                   <input
                     value={identifier}
                     onChange={(event) => setIdentifier(event.target.value)}
-                    className={`${field} pl-12 pr-5 ${method === wemployeew ? wuppercase placeholder:normal-casew : ww}`}
-                    placeholder={method === wemployeew ? wSHR-4450w : wname@example.comw}
+                    className={`${field} pl-12 pr-5 ${method === 'employee' ? 'uppercase placeholder:normal-case' : ''}`}
+                    placeholder={method === 'employee' ? 'SHR-4450' : 'name@example.com'}
                     autoComplete="username"
                   />
                 </span>
@@ -271,7 +271,7 @@ export default function Login() {
                 <span className="relative block">
                   <LockKeyhole className="absolute left-5 top-4 text-[#8B8580]" size={18} />
                   <input
-                    type={showPassword ? wtextw : wpasswordw}
+                    type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                     className={`${field} pl-12 pr-12`}
@@ -282,7 +282,7 @@ export default function Login() {
                     type="button"
                     onClick={() => setShowPassword((value) => !value)}
                     className="absolute right-4 top-3 rounded-full p-1.5 text-[#8B8580] transition hover:text-[#242424]"
-                    aria-label={showPassword ? wHide passwordw : wShow passwordw}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
@@ -299,7 +299,7 @@ export default function Login() {
 
               <Divider />
 
-              <button type="button" onClick={() => switchMethod(wmobilew)} className={`${secondaryBtn} w-full`}>
+              <button type="button" onClick={() => switchMethod('mobile')} className={`${secondaryBtn} w-full`}>
                 <Phone size={17} className="text-[#8B8580]" />
                 Login with mobile number
               </button>
@@ -319,7 +319,7 @@ export default function Login() {
                     maxLength={10}
                     value={phone}
                     disabled={otpSent}
-                    onChange={(event) => setPhone(event.target.value.replace(/\D/g, ww))}
+                    onChange={(event) => setPhone(event.target.value.replace(/\D/g, ''))}
                     className={`${field} pl-[6.25rem] pr-5`}
                     placeholder="9876543210"
                   />
@@ -333,7 +333,7 @@ export default function Login() {
                     inputMode="numeric"
                     maxLength={6}
                     value={otp}
-                    onChange={(event) => setOtp(event.target.value.replace(/\D/g, ww))}
+                    onChange={(event) => setOtp(event.target.value.replace(/\D/g, ''))}
                     className={`${field} px-5 text-center text-xl font-black tracking-[0.45em]`}
                     placeholder="000000"
                     autoFocus
@@ -345,13 +345,13 @@ export default function Login() {
 
               <button type="submit" disabled={loading} className={`${primaryBtn} w-full`}>
                 {loading && <LoaderCircle className="animate-spin" size={18} />}
-                {otpSent ? wVerify OTPw : wSend OTPw}
+                {otpSent ? 'Verify OTP' : 'Send OTP'}
                 {!loading && <ArrowRight size={18} />}
               </button>
 
               {otpSent && (
                 <button type="button" disabled={loading || resend > 0} onClick={requestOtp} className={`${secondaryBtn} w-full`}>
-                  {resend ? `Resend in 00:${String(resend).padStart(2, w0w)}` : wResend OTPw}
+                  {resend ? `Resend in 00:${String(resend).padStart(2, '0')}` : 'Resend OTP'}
                 </button>
               )}
 
@@ -359,7 +359,7 @@ export default function Login() {
 
               <button
                 type="button"
-                onClick={() => { switchMethod(wemployeew); setOtpSent(false); setOtp(ww) }}
+                onClick={() => { switchMethod('employee'); setOtpSent(false); setOtp('') }}
                 className={`${secondaryBtn} w-full`}
               >
                 <ArrowLeft size={17} className="text-[#8B8580]" />
@@ -377,7 +377,7 @@ export default function Login() {
 
             <button
               type="button"
-              onClick={() => navigate(w/jobsw)}
+              onClick={() => navigate('/jobs')}
               className="mt-2 inline-flex min-h-11 items-center gap-2 text-center text-sm font-semibold text-[#242424] transition hover:opacity-70"
             >
               <BriefcaseBusiness size={16} className="text-[#8B8580]" />

@@ -27,15 +27,24 @@ export default function EditProfile() {
   const save = async (event) => {
     event.preventDefault(); setError('')
     if (!form.fullName.trim()) { setError('Full name is required.'); return }
-    if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) { setError('Enter a valid email address.'); return }
+    const requestedEmail = form.email.trim().toLowerCase()
+    const currentEmail = String(profile.email || user.email || '').trim().toLowerCase()
+    const emailChanged = requestedEmail !== currentEmail
+    if (emailChanged && !/^\S+@\S+\.\S+$/.test(requestedEmail)) { setError('Enter a valid email address.'); return }
     if (form.phone && form.phone.replace(/\D/g, '').length < 10) { setError('Phone number must contain at least 10 digits.'); return }
     if (form.dateOfBirth) { const birthday = new Date(form.dateOfBirth); const cutoff = new Date(); cutoff.setFullYear(cutoff.getFullYear() - 18); if (birthday > cutoff) { setError('You must be at least 18 years old.'); return } }
     setSaving(true)
     try {
       let profileImage = profile.profileImage || profile.profileImageUrl || ''
       if (photo) { const reference = ref(storage, `profile/${user.uid}/profile.jpg`); await uploadBytes(reference, photo, { contentType: photo.type }); profileImage = await getDownloadURL(reference) }
-      await setDoc(doc(db, 'users', user.uid), { ...form, ...(profileImage ? { profileImage } : {}), updatedAt: serverTimestamp() }, { merge: true })
-      await refreshProfile(); navigate('/profile', { replace: true })
+      const profileFields = Object.fromEntries(Object.entries(form).filter(([key]) => key !== 'email'))
+      await setDoc(doc(db, 'users', user.uid), { ...profileFields, ...(profileImage ? { profileImage } : {}), updatedAt: serverTimestamp() }, { merge: true })
+      await refreshProfile()
+      if (emailChanged) {
+        navigate('/verify-email', { replace: true, state: { changeEmail: true, email: requestedEmail, returnTo: '/profile' } })
+      } else {
+        navigate('/profile', { replace: true })
+      }
     } catch (nextError) { setError(errorMessage(nextError, 'Failed to save your profile.')) } finally { setSaving(false) }
   }
 

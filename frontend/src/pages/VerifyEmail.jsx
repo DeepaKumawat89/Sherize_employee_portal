@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore'
 import { LoaderCircle, MailCheck, RefreshCw, ShieldCheck } from 'lucide-react'
 import { auth, db } from '../services/firebase'
@@ -9,6 +9,7 @@ import { errorMessage } from '../shared/utils/format'
 
 export default function VerifyEmail() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [email, setEmail] = useState('')
   const [otp, setOtp] = useState('')
   const [sent, setSent] = useState(false)
@@ -21,10 +22,10 @@ export default function VerifyEmail() {
     if (!user) { navigate('/login', { replace: true }); return }
     getDoc(doc(db, 'users', user.uid)).then((snapshot) => {
       const data = snapshot.data() || {}
-      if (data.emailVerified === true) navigate('/', { replace: true })
-      else setEmail(data.email || user.email || '')
+      if (data.emailVerified === true && !location.state?.changeEmail) navigate('/', { replace: true })
+      else setEmail(location.state?.email || data.email || user.email || '')
     }).catch(() => {})
-  }, [navigate])
+  }, [location.state, navigate])
 
   useEffect(() => {
     if (!resend) return undefined
@@ -43,7 +44,7 @@ export default function VerifyEmail() {
     event.preventDefault(); setError('')
     if (!/^\d{6}$/.test(otp)) { setError('Enter the 6-digit OTP.'); return }
     setLoading(true)
-    try { await verifyExistingEmailOtp(otp, email.trim()); navigate('/', { replace: true }) } catch (nextError) { setError(errorMessage(nextError, 'Incorrect or expired OTP.')) } finally { setLoading(false) }
+    try { await verifyExistingEmailOtp(otp, email.trim()); navigate(location.state?.returnTo || '/', { replace: true }) } catch (nextError) { setError(errorMessage(nextError, 'Incorrect or expired OTP.')) } finally { setLoading(false) }
   }
 
   return <div className="grid min-h-dvh min-w-0 place-items-center overflow-y-auto bg-slate-950 p-3 sm:p-4"><form onSubmit={verify} className="my-auto w-full max-w-md rounded-3xl bg-white p-5 shadow-2xl sm:p-8"><span className="grid size-14 place-items-center rounded-2xl bg-indigo-50 text-indigo-600"><MailCheck size={26} /></span><p className="mt-6 text-xs font-black uppercase tracking-[0.18em] text-indigo-600">Account recovery</p><h1 className="mt-2 text-2xl font-black text-slate-950">Verify your email</h1><p className="mt-2 text-sm leading-6 text-slate-500">Add and verify an email address for account recovery and important employee updates.</p>{error && <div className="mt-5"><Alert onClose={() => setError('')}>{error}</Alert></div>}<div className="mt-6 space-y-4"><label><span className="mb-2 block text-sm font-bold text-slate-700">Email address</span><input type="email" value={email} disabled={sent} onChange={(event) => setEmail(event.target.value)} className={inputClass} /></label>{sent && <label><span className="mb-2 block text-sm font-bold text-slate-700">6-digit OTP</span><input inputMode="numeric" maxLength={6} value={otp} onChange={(event) => setOtp(event.target.value.replace(/\D/g, ''))} className={`${inputClass} text-center text-xl font-black tracking-[0.45em]`} autoFocus /></label>}</div>{sent ? <><button type="submit" disabled={loading} className={`${primaryButton} mt-6 w-full`}>{loading ? <LoaderCircle className="animate-spin" size={18} /> : <ShieldCheck size={18} />}Verify email</button><button type="button" disabled={loading || resend > 0} onClick={send} className={`${secondaryButton} mt-3 w-full`}><RefreshCw size={17} />{resend ? `Resend in 00:${String(resend).padStart(2, '0')}` : 'Resend OTP'}</button></> : <button type="button" disabled={loading} onClick={send} className={`${primaryButton} mt-6 w-full`}>{loading ? <LoaderCircle className="animate-spin" size={18} /> : <MailCheck size={18} />}Send verification OTP</button>}</form></div>
