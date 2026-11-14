@@ -103,7 +103,7 @@ export default function SettingsPage() {
       {/* Profile summary */}
       <section className={`${cardClass} mb-6 overflow-hidden`}>
         <div className="h-16 bg-gradient-to-r from-indigo-600 to-indigo-400" />
-        <div className="flex flex-col gap-4 px-5 pb-5 sm:flex-row sm:items-end sm:px-6">
+        <div className="flex flex-col gap-4 px-4 pb-5 min-[380px]:px-5 sm:flex-row sm:items-end sm:px-6">
           <span className="-mt-8 grid size-16 shrink-0 place-items-center rounded-2xl bg-indigo-100 text-2xl font-black text-indigo-700 shadow-sm ring-4 ring-white">
             {initial}
           </span>
@@ -146,7 +146,7 @@ export default function SettingsPage() {
       ))}
 
       {/* Portal lock */}
-      <section className={`${cardClass} mb-6 p-5 sm:p-6`}>
+      <section className={`${cardClass} mb-6 p-4 min-[380px]:p-5 sm:p-6`}>
         <div className="flex items-start gap-4">
           <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-indigo-50 text-indigo-600">
             <LockKeyhole size={20} />
@@ -198,7 +198,7 @@ export default function SettingsPage() {
           )}
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-col gap-2 min-[380px]:flex-row min-[380px]:flex-wrap [&>*]:w-full min-[380px]:[&>*]:w-auto">
           {security.enabled ? (
             <>
               <button type="button" onClick={() => security.lock()} className={primaryButton}>Lock now</button>

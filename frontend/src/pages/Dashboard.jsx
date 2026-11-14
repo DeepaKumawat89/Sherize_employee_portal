@@ -258,10 +258,10 @@ export default function Dashboard() {
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.65fr)_minmax(280px,.75fr)] xl:items-stretch">
         <section className={`${cardClass} relative overflow-hidden`}>
           <div className={`h-1.5 w-full bg-gradient-to-r ${theme.accent}`} />
-          <div className="p-5 sm:p-7">
+          <div className="p-4 min-[380px]:p-5 sm:p-7">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-              <div className="flex min-w-0 items-center gap-4 sm:gap-5">
-                <span className={`grid size-16 shrink-0 place-items-center rounded-2xl ${theme.icon}`}><Clock3 size={28} /></span>
+              <div className="flex min-w-0 items-center gap-3 min-[380px]:gap-4 sm:gap-5">
+                <span className={`grid size-14 shrink-0 place-items-center rounded-2xl min-[380px]:size-16 ${theme.icon}`}><Clock3 size={28} /></span>
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Today’s work session</p>
@@ -275,7 +275,7 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2.5">
+              <div className="flex flex-col gap-2.5 min-[400px]:flex-row min-[400px]:flex-wrap [&>*]:w-full min-[400px]:[&>*]:w-auto">
                 {status === 'idle' && (
                   <button disabled={sessionBusy} onClick={() => sessionAction('start_day')} className={primaryButton}>
                     {sessionBusy ? <LoaderCircle className="animate-spin" size={18} /> : <Play size={18} />}Start day
@@ -309,7 +309,7 @@ export default function Dashboard() {
 
             {session && (
               <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 sm:p-5">
-                <div className="grid gap-4 lg:grid-cols-[1fr_220px_auto] lg:items-end">
+                <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1fr)_220px_auto] lg:items-end">
                   <label>
                     <span className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-500">Today’s progress note</span>
                     <input value={progressNote} onChange={(event) => setProgressNote(event.target.value)} className={inputClass} placeholder="What did you complete today?" />
@@ -345,7 +345,7 @@ export default function Dashboard() {
 
       {/* Checklist + wallet */}
       <div className="mt-6 grid gap-6 xl:grid-cols-[1.2fr_.8fr]">
-        <section className={`${cardClass} p-5 sm:p-7`}>
+          <section className={`${cardClass} p-4 min-[380px]:p-5 sm:p-7`}>
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-indigo-600">Getting started</p>
@@ -363,7 +363,7 @@ export default function Dashboard() {
               <Link
                 key={label}
                 to={path}
-                className={`group flex items-center gap-4 rounded-2xl border p-4 transition ${done ? 'border-emerald-100 bg-emerald-50/40' : 'border-slate-200 hover:border-indigo-200 hover:bg-indigo-50/40'}`}
+                className={`group flex min-w-0 items-center gap-3 rounded-2xl border p-3 min-[380px]:gap-4 min-[380px]:p-4 ${done ? 'border-emerald-100 bg-emerald-50/40' : 'border-slate-200 hover:border-indigo-200 hover:bg-indigo-50/40'} transition`}
               >
                 <span className={`grid size-11 shrink-0 place-items-center rounded-xl ${done ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500 group-hover:bg-indigo-100 group-hover:text-indigo-600'}`}>
                   {done ? <CheckCircle2 size={20} /> : <Icon size={20} />}
@@ -373,22 +373,22 @@ export default function Dashboard() {
                   <p className="mt-0.5 text-xs text-slate-500">{done ? 'Completed' : 'Action required'}</p>
                 </div>
                 {done
-                  ? <span className="text-xs font-bold text-emerald-600">Done</span>
-                  : <span className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600">Continue<ArrowRight size={14} className="transition group-hover:translate-x-0.5" /></span>}
+                  ? <span className="shrink-0 text-xs font-bold text-emerald-600">Done</span>
+                  : <span className="inline-flex shrink-0 items-center gap-1 text-xs font-bold text-indigo-600"><span className="hidden min-[380px]:inline">Continue</span><ArrowRight size={14} className="transition group-hover:translate-x-0.5" /></span>}
               </Link>
             ))}
           </div>
         </section>
 
         {platform.earningsSystemEnabled && (
-          <section className={`${cardClass} relative overflow-hidden bg-slate-950 p-6 text-white sm:p-7`}>
+          <section className={`${cardClass} relative overflow-hidden bg-slate-950 p-5 text-white sm:p-7`}>
             <div className="pointer-events-none absolute -right-16 -top-16 size-56 rounded-full bg-indigo-500/25 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-20 -left-10 size-48 rounded-full bg-emerald-500/10 blur-3xl" />
             <div className="relative flex h-full flex-col">
               <span className="grid size-12 place-items-center rounded-2xl bg-white/10 text-indigo-300 ring-1 ring-white/10"><Banknote size={23} /></span>
               <p className="mt-6 text-sm font-semibold text-slate-400">Available balance</p>
-              <strong className="mt-1 block text-4xl font-black tracking-tight sm:text-5xl">{money(wallet?.balance)}</strong>
-              <div className="mt-6 flex items-center justify-between rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+              <strong className="mt-1 block break-words text-3xl font-black tracking-tight min-[380px]:text-4xl sm:text-5xl">{money(wallet?.balance)}</strong>
+              <div className="mt-6 flex flex-col gap-2 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10 min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between">
                 <span className="flex items-center gap-2 text-sm text-slate-400"><span className="size-2 rounded-full bg-amber-400" />Pending review</span>
                 <b className="text-amber-300">{money(pendingAmount)}</b>
               </div>

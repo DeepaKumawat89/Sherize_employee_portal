@@ -93,17 +93,17 @@ export default function Profile() {
 
       <section className={`${cardClass} overflow-hidden`}>
         {/* Hero */}
-        <div className="relative overflow-hidden bg-slate-950 p-6 text-white sm:p-8">
+        <div className="relative overflow-hidden bg-slate-950 p-5 text-white sm:p-8">
           <div className="pointer-events-none absolute -right-20 -top-24 size-72 rounded-full bg-indigo-500/25 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-24 left-1/3 size-56 rounded-full bg-emerald-500/10 blur-3xl" />
 
           <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center">
-            <span className="grid size-24 shrink-0 place-items-center overflow-hidden rounded-3xl bg-indigo-500 text-4xl font-black uppercase ring-4 ring-white/10">
+            <span className="grid size-20 shrink-0 place-items-center overflow-hidden rounded-3xl bg-indigo-500 text-3xl font-black uppercase ring-4 ring-white/10 sm:size-24 sm:text-4xl">
               {avatar ? <img src={avatar} alt="" className="size-full object-cover" /> : name[0]}
             </span>
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-3">
-                <h2 className="truncate text-2xl font-black tracking-tight sm:text-3xl">{name}</h2>
+                <h2 className="break-words text-2xl font-black tracking-tight sm:text-3xl">{name}</h2>
                 <StatusPill status={isKycApproved(profile) ? 'verified' : kyc} />
               </div>
               <p className="mt-2 text-sm font-semibold text-indigo-200">{profile.workerId || 'Employee ID pending'}</p>
@@ -111,11 +111,11 @@ export default function Profile() {
             </div>
           </div>
 
-          <dl className="relative mt-7 grid divide-x divide-white/10 rounded-2xl bg-white/5 ring-1 ring-white/10" style={{ gridTemplateColumns: `repeat(${stats.length}, minmax(0, 1fr))` }}>
+          <dl className="relative mt-7 grid grid-cols-1 divide-y divide-white/10 rounded-2xl bg-white/5 ring-1 ring-white/10 min-[380px]:grid-cols-3 min-[380px]:divide-x min-[380px]:divide-y-0">
             {stats.map(([label, value]) => (
               <div key={label} className="px-4 py-4 text-center sm:px-6">
                 <dt className="text-xs font-semibold text-slate-400">{label}</dt>
-                <dd className="mt-1 truncate text-xl font-black sm:text-2xl">{value}</dd>
+                <dd className="mt-1 break-words text-xl font-black sm:text-2xl">{value}</dd>
               </div>
             ))}
           </dl>
@@ -130,7 +130,7 @@ export default function Profile() {
         )}
 
         {/* Details */}
-        <div className="p-6 sm:p-8">
+          <div className="p-5 sm:p-8">
           <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-600">Personal details</h3>
           <dl className="mt-5 grid gap-x-8 gap-y-6 sm:grid-cols-2 xl:grid-cols-3">
             {details.map(([label, value]) => {

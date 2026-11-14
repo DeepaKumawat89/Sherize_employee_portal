@@ -72,7 +72,7 @@ export default function BankDetails() {
       <form onSubmit={save} className={`${cardClass} mx-auto max-w-3xl overflow-hidden`}>
         <div className="h-1.5 w-full bg-gradient-to-r from-indigo-500 to-indigo-300" />
 
-        <div className="p-5 sm:p-8">
+        <div className="p-4 min-[380px]:p-5 sm:p-8">
           {/* Mode selector */}
           <p className="text-xs font-bold uppercase tracking-wider text-indigo-600">Payment method</p>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -84,7 +84,7 @@ export default function BankDetails() {
                   type="button"
                   onClick={() => setMode(value)}
                   aria-pressed={selected}
-                  className={`group relative flex items-center gap-4 rounded-2xl border p-4 text-left transition ${selected ? 'border-indigo-500 bg-indigo-50/70 ring-4 ring-indigo-500/10' : 'border-slate-200 hover:border-indigo-200 hover:bg-slate-50'}`}
+                  className={`group relative flex min-w-0 items-center gap-3 rounded-2xl border p-3 text-left transition min-[380px]:gap-4 min-[380px]:p-4 ${selected ? 'border-indigo-500 bg-indigo-50/70 ring-4 ring-indigo-500/10' : 'border-slate-200 hover:border-indigo-200 hover:bg-slate-50'}`}
                 >
                   <span className={`grid size-12 shrink-0 place-items-center rounded-xl transition ${selected ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 group-hover:bg-indigo-100 group-hover:text-indigo-600'}`}><Icon size={21} /></span>
                   <span className="min-w-0 flex-1">

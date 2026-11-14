@@ -87,7 +87,7 @@ export default function Kyc() {
 
       <section className={`${cardClass} overflow-hidden`}>
         {/* Status banner */}
-        <div className={`flex items-start gap-4 border-b p-5 sm:p-6 ${banner.tone} ${banner.border}`}>
+        <div className={`flex items-start gap-3 border-b p-4 min-[380px]:gap-4 min-[380px]:p-5 sm:p-6 ${banner.tone} ${banner.border}`}>
           <span className={`grid size-12 shrink-0 place-items-center rounded-2xl ${banner.iconTone}`}><BannerIcon size={23} /></span>
           <div className="min-w-0">
             <h2 className="font-black text-slate-950">{banner.title}</h2>
@@ -96,7 +96,7 @@ export default function Kyc() {
         </div>
 
         {/* Documents */}
-        <div className="p-5 sm:p-7">
+        <div className="p-4 min-[380px]:p-5 sm:p-7">
           <div className="flex items-center justify-between gap-3">
             <p className="text-xs font-bold uppercase tracking-wider text-indigo-600">Required documents</p>
             <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">{readyCount}/3 ready</span>
@@ -137,11 +137,11 @@ export default function Kyc() {
         </div>
 
         {/* Footer */}
-        <div className="flex flex-col gap-4 border-t border-slate-200 bg-slate-50/60 p-5 sm:flex-row sm:items-center sm:p-6">
+        <div className="flex flex-col gap-4 border-t border-slate-200 bg-slate-50/60 p-4 min-[380px]:p-5 sm:flex-row sm:items-center sm:p-6">
           <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-indigo-50 text-indigo-600"><LockKeyhole size={19} /></span>
           <p className="flex-1 text-sm leading-6 text-slate-600">Documents are stored in the existing secured Firebase Storage paths and used only for identity verification.</p>
           {!isVerified && (
-            <button type="button" onClick={submit} disabled={disabled || busy || !files.profile || !files.aadhaar || !files.pan} className={primaryButton}>
+            <button type="button" onClick={submit} disabled={disabled || busy || !files.profile || !files.aadhaar || !files.pan} className={`${primaryButton} w-full sm:w-auto`}>
               {busy ? <LoaderCircle className="animate-spin" size={18} /> : <ShieldCheck size={18} />}
               {status === 'rejected' ? 'Resubmit documents' : 'Submit for review'}
             </button>

@@ -101,7 +101,7 @@ export default function Help() {
             href={href}
             target={href.startsWith('http') ? '_blank' : undefined}
             rel="noreferrer"
-            className={`${cardClass} group flex items-center gap-4 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-100/60`}
+            className={`${cardClass} group flex min-w-0 items-center gap-3 p-4 min-[380px]:gap-4 min-[380px]:p-5 transition duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-100/60`}
           >
             <span className={`grid size-12 shrink-0 place-items-center rounded-2xl transition ${tone}`}><Icon size={21} /></span>
             <span className="min-w-0 flex-1">

@@ -31,7 +31,7 @@ function TaskCard({ item, assigned = false, onAction, busy, earningsEnabled }) {
     <article className={`${cardClass} group relative flex flex-col overflow-hidden transition duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-100/60`}>
       <div className="h-1 w-full bg-gradient-to-r from-indigo-500 to-indigo-300" />
 
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
+      <div className="flex min-w-0 flex-1 flex-col p-4 min-[380px]:p-5 sm:p-6">
         <div className="flex items-start justify-between gap-3">
           <span className="grid size-12 place-items-center rounded-2xl bg-indigo-50 text-indigo-600 transition group-hover:bg-indigo-600 group-hover:text-white">
             <BriefcaseBusiness size={22} />
@@ -67,7 +67,7 @@ function TaskCard({ item, assigned = false, onAction, busy, earningsEnabled }) {
 
         <div className="mt-auto pt-5">
           {item.tatDeadline && (
-            <p className="mb-4 flex items-center gap-2 rounded-xl bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-800 ring-1 ring-inset ring-amber-100">
+            <p className="mb-4 flex min-w-0 items-start gap-2 break-words rounded-xl bg-amber-50 px-3 py-2 text-xs font-semibold leading-5 text-amber-800 ring-1 ring-inset ring-amber-100">
               <Clock3 size={15} className="shrink-0" />TAT {formatDateTime(item.tatDeadline)}
             </p>
           )}
@@ -142,13 +142,13 @@ export default function Tasks() {
       />
 
       <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-2.5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
-        <div className="inline-flex rounded-xl bg-slate-100 p-1">
+        <div className="grid w-full grid-cols-2 rounded-xl bg-slate-100 p-1 sm:inline-flex sm:w-auto">
           {tabs.map(([value, label, count]) => (
             <button
               key={value}
               type="button"
               onClick={() => setTab(value)}
-              className={`flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold transition ${tab === value ? 'bg-white text-indigo-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+              className={`flex min-w-0 items-center justify-center gap-1.5 rounded-lg px-2 py-2.5 text-xs font-bold transition min-[380px]:gap-2 min-[380px]:px-3 min-[380px]:text-sm ${tab === value ? 'bg-white text-indigo-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
             >
               {label}
               <span className={`grid min-w-6 place-items-center rounded-full px-1.5 py-0.5 text-xs font-black ${tab === value ? 'bg-indigo-50 text-indigo-700' : 'bg-slate-200 text-slate-500'}`}>{count}</span>

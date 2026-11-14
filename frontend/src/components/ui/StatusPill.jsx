@@ -8,5 +8,5 @@ export default function StatusPill({ status }) {
         ? 'bg-amber-50 text-amber-700 ring-amber-200'
         : 'bg-slate-100 text-slate-600 ring-slate-200'
 
-  return <span className={`inline-flex rounded-full px-2.5 py-1 text-[11px] font-bold capitalize ring-1 ring-inset ${colors}`}>{value.replaceAll('_', ' ')}</span>
+  return <span className={`inline-flex whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-bold capitalize ring-1 ring-inset ${colors}`}>{value.replaceAll('_', ' ')}</span>
 }

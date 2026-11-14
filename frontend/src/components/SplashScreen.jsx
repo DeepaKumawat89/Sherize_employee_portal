@@ -1,12 +1,12 @@
 export default function SplashScreen() {
   return (
     <main
-      className="grid min-h-dvh place-items-center overflow-hidden bg-[#FAF7F2] px-6"
+      className="grid min-h-dvh min-w-0 place-items-center overflow-hidden bg-[#FAF7F2] px-4 sm:px-6"
       role="status"
       aria-live="polite"
       aria-label="Loading Sherize Employee Portal"
     >
-      <div className="flex w-full max-w-[420px] flex-col items-center">
+      <div className="flex w-full max-w-[420px] min-w-0 flex-col items-center">
         <img
           src="/logo.png"
           alt="Sherize"
